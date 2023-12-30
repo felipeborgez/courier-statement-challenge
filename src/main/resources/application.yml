@@ -1,0 +1,63 @@
+spring:
+  profiles:
+    active: local
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+#  jpa:
+#    open-in-view: false
+
+  application:
+    name: courier-statement
+
+  datasource:
+    platform: postgres
+    jdbcUrl: jdbc:postgresql://localhost:5432/courier-statement
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+    hikari:
+      connectionTimeout: 30000
+      idleTimeout: 600000
+      maxLifetime: 1800000
+
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: "localhost:29092"
+      group-id: courier-statement
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: com.learning.events # change this with your event packages
+    producer:
+      acks: -1
+      bootstrap-servers: "localhost:29092"
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+
+cloud:
+  aws:
+    credentials:
+      instanceProfile: true
+      access-key: AKIAXPGS7V5AWNBDMS3I
+      secret-key: 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
+    stack:
+      auto: false
+    region:
+      static: us-east-1
+    endpoint:
+      url: http://localhost:4566/
+
+messaging:
+  queue:
+    delivery_created: courier_event_delivery_created
+    adjustment_modified: courier_event_adjustment_modified
+    bonus_modified: courier_event_bonus_modified
+
+server:
+  error:
+    include-message: always

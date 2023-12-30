@@ -1,0 +1,51 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.7'
+	id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.skipthedishes'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+	implementation "org.springframework.boot:spring-boot-starter-data-jdbc:$springBootVersion"
+	implementation "org.springframework.boot:spring-boot-starter-json:$springBootVersion"
+//	implementation 'org.springframework.data:spring-data-jpa:3.2.1'
+
+//	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.springframework.kafka:spring-kafka'
+
+	implementation "org.springframework.cloud:spring-cloud-aws-core:$springCloudVersion"
+	implementation "org.springframework.cloud:spring-cloud-aws-context:$springCloudVersion"
+	implementation "org.springframework.cloud:spring-cloud-aws-messaging:$springCloudVersion"
+	implementation "org.springframework.cloud:spring-cloud-starter-aws-messaging:$springCloudVersion"
+//	implementation "org.springframework.cloud:spring-cloud-starter-aws:$springCloudVersion"
+
+	implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+	implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion"
+	implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion"
+
+	implementation 'org.mockito:mockito-core:5.8.0'
+
+	implementation 'com.zaxxer:HikariCP:5.1.0'
+	implementation 'org.postgresql:postgresql'
+
+	implementation 'org.jetbrains:annotations:24.0.0'
+	developmentOnly 'org.springframework.boot:spring-boot-docker-compose:3.2.1'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
+//	testImplementation "org.testcontainers:testcontainers:1.19.3"
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

@@ -1,0 +1,34 @@
+--CREATE TABLE delivery (
+--    id UUID NOT NULL constraint pk_delivery PRIMARY KEY,
+--    courier_id  UUID NOT NULL,
+--    created_timestamp TIMESTAMP NOT NULL,
+--    value bigint NOT NULL,
+--    inserted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+--);
+--
+--CREATE TABLE adjustment (
+--    id UUID constraint pk_adjustment PRIMARY KEY,
+--    delivery_id UUID NOT NULL,
+--    modified_timestamp TIMESTAMP NOT NULL,
+--    value bigint NOT NULL,
+--    inserted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--    CONSTRAINT fk_adjustment_delivery
+--        FOREIGN KEY(delivery_id)
+--        REFERENCES delivery(id)
+--);
+--
+--CREATE TABLE bonus (
+--    id UUID constraint pk_bonus PRIMARY KEY,
+--    delivery_id UUID NOT NULL,
+--    modified_timestamp TIMESTAMP NOT NULL,
+--    value bigint NOT NULL,
+--    inserted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--    CONSTRAINT fk_bonus_delivery
+--        FOREIGN KEY(delivery_id)
+--        REFERENCES delivery(id)
+--);
+--
+--CREATE INDEX idx_delivery_courier ON delivery(courier_id);
+--CREATE INDEX idx_delivery_timestamp ON delivery(created_timestamp);
+--CREATE INDEX idx_adjustment_timestamp ON adjustment(modified_timestamp);
+--CREATE INDEX idx_bonus_timestamp ON bonus(modified_timestamp);
