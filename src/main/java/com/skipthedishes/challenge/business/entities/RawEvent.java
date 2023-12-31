@@ -1,8 +1,5 @@
-package com.skipthedishes.challenge.business.old_entities;
+package com.skipthedishes.challenge.business.entities;
 
-import org.postgresql.util.PGobject;
-
-import java.sql.SQLException;
 import java.time.Instant;
 import java.util.UUID;
 

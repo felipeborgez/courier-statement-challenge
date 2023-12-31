@@ -2,7 +2,7 @@ package com.skipthedishes.challenge.business.services;
 
 import com.skipthedishes.challenge.api.events.DeliveryCreated;
 import com.skipthedishes.challenge.api.events.CourierEvent;
-import com.skipthedishes.challenge.business.old_entities.RawEvent;
+import com.skipthedishes.challenge.business.entities.RawEvent;
 import com.skipthedishes.challenge.business.repositories.DeliveryRepository;
 import com.skipthedishes.challenge.business.repositories.EventRepository;
 import com.skipthedishes.challenge.business.repositories.TransactionRepository;

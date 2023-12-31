@@ -1,11 +1,10 @@
+version: "3.8"
 services:
 
-  app:
-    build: .
-#    command:
-#      -
-    ports:
-      - '8081:8080'
+  #  app:
+#    build: .
+#    ports:
+#      - '8081:8080'
 
   flyway:
     image: flyway/flyway:10-alpine
@@ -43,80 +42,9 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - ".docker/docker-entrypoint.sh/:/docker-entrypoint-initaws.d/docker-entrypoint.sh"
 
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.4.3
-    networks:
-      - broker-kafka
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-
-  kafka:
-    image: confluentinc/cp-kafka:7.4.3
-    networks:
-      - broker-kafka
-    depends_on:
-      - zookeeper
-    ports:
-      - "9092:9092"
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_SCHEMA_REGISTRY_URL: schemaregistry:8085
-
-  init-kafka:
-    image: confluentinc/cp-kafka:7.4.3
-    networks:
-      - broker-kafka
-    depends_on:
-      - kafka
-    entrypoint: [ '/bin/sh', '-c' ]
-    command: |
-      "
-      # blocks until kafka is reachable
-      kafka-topics --bootstrap-server kafka:29092 --list    
-
-      echo -e 'Creating kafka topics'
-      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic courier_event_delivery_created --replication-factor 1 --partitions 1
-      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic courier_event_adjustment_modified --replication-factor 1 --partitions 1
-      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic courier_event_bonus_modified --replication-factor 1 --partitions 1
-
-      echo -e 'Successfully created the following topics:'
-      kafka-topics --bootstrap-server kafka:29092 --list
-      "
-
-  schema_registry:
-    image: confluentinc/cp-schema-registry:6.2.0
-    restart: always
-    networks:
-      - broker-kafka
-    depends_on:
-      - zookeeper
-    environment:
-      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: "zookeeper:2181"
-      SCHEMA_REGISTRY_HOST_NAME: schema_registry
-      SCHEMA_REGISTRY_LISTENERS: "http://0.0.0.0:8085"
-    ports:
-      - "8085:8085"
-
-  kafdrop:
-    image: obsidiandynamics/kafdrop:4.0.1
-    networks:
-      - broker-kafka
-    depends_on:
-      - kafka
-    ports:
-      - "19000:9000"
-    environment:
-      KAFKA_BROKERCONNECT: kafka:29092
-
 #  k6:
 #    image: mostafamoradian/xk6-kafka:0.22.0
-#    command: k6 run kafka-script.js
+#    command: k6 run queue-script.js
 ##    command: ["sleep ","infinity"]
 #    networks:
 #      - broker-kafka
@@ -124,14 +52,6 @@ services:
 #      - kafka
 #    volumes:
 #      - ./k6:/~
-
-
-#  cache:
-#    image: redis:6.2-alpine
-#    restart: always
-#    ports:
-#      - '6379:6379'
-#
 
 networks:
   broker-kafka:

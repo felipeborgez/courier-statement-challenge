@@ -1,6 +1,6 @@
 package com.skipthedishes.challenge.business.repositories.impl;
 
-import com.skipthedishes.challenge.business.old_entities.Delivery;
+import com.skipthedishes.challenge.business.entities.Delivery;
 import com.skipthedishes.challenge.business.repositories.DeliveryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

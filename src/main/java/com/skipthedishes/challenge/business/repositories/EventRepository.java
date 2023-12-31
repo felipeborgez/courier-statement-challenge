@@ -1,6 +1,6 @@
 package com.skipthedishes.challenge.business.repositories;
 
-import com.skipthedishes.challenge.business.old_entities.RawEvent;
+import com.skipthedishes.challenge.business.entities.RawEvent;
 
 import java.util.UUID;
 

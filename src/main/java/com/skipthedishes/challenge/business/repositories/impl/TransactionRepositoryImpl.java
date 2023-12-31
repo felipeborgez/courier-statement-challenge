@@ -1,6 +1,6 @@
 package com.skipthedishes.challenge.business.repositories.impl;
 
-import com.skipthedishes.challenge.business.old_entities.Transaction;
+import com.skipthedishes.challenge.business.entities.Transaction;
 import com.skipthedishes.challenge.business.repositories.TransactionRepository;
 import com.skipthedishes.challenge.business.repositories.mapper.TransactionRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;

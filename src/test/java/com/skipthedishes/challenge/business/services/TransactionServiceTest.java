@@ -1,6 +1,6 @@
 package com.skipthedishes.challenge.business.services;
 
-import com.skipthedishes.challenge.business.old_entities.Transaction;
+import com.skipthedishes.challenge.business.entities.Transaction;
 import com.skipthedishes.challenge.business.vo.DeliveryTransaction;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

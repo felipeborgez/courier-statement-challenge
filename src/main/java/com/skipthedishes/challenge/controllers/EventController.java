@@ -6,8 +6,6 @@ import com.skipthedishes.challenge.api.events.AdjustmentModified;
 import com.skipthedishes.challenge.api.events.BonusModified;
 import com.skipthedishes.challenge.api.events.CourierEvent;
 import com.skipthedishes.challenge.api.events.DeliveryCreated;
-import com.skipthedishes.challenge.business.old_entities.RawEvent;
-import com.skipthedishes.challenge.business.repositories.EventRepository;
 import com.skipthedishes.challenge.business.services.EventService;
 import com.skipthedishes.challenge.messaging.publisher.QueueService;
 import org.springframework.beans.factory.annotation.Autowired;

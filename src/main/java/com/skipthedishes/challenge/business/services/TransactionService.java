@@ -1,7 +1,7 @@
 package com.skipthedishes.challenge.business.services;
 
 import com.skipthedishes.challenge.api.responses.WeeklyStatementResponse;
-import com.skipthedishes.challenge.business.old_entities.Transaction;
+import com.skipthedishes.challenge.business.entities.Transaction;
 import com.skipthedishes.challenge.business.repositories.TransactionRepository;
 import com.skipthedishes.challenge.business.vo.DeliveryTransaction;
 import com.skipthedishes.challenge.business.vo.WeekPeriod;
@@ -33,12 +33,6 @@ public class TransactionService {
             repository.findAllByCourier(courierId)
         );
     }
-
-//    public List<DeliveryTransaction> getDeliveryTransactions(UUID courierId) {
-//        List<Transaction> transactionList = repository.findAllByCourier(courierId);
-//        transactionList.forEach( t -> System.out.println( "RecordSet: " + t.toString()));
-//        return calculateDeliveryTransaction(transactionList);
-//    }
 
     public List<DeliveryTransaction> calculateDeliveryTransaction(List<Transaction> list){
         Map<UUID, List<Transaction>> map = list.stream().collect(

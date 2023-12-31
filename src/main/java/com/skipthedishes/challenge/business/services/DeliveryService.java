@@ -1,7 +1,7 @@
 package com.skipthedishes.challenge.business.services;
 
-import com.skipthedishes.challenge.business.old_entities.Delivery;
-import com.skipthedishes.challenge.business.old_entities.Transaction;
+import com.skipthedishes.challenge.business.entities.Delivery;
+import com.skipthedishes.challenge.business.entities.Transaction;
 import com.skipthedishes.challenge.business.repositories.TransactionRepository;
 //import com.skipthedishes.challenge.messaging.publisher.EventPublisher;
 import org.springframework.beans.factory.annotation.Autowired;

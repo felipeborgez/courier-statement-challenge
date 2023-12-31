@@ -1,6 +1,5 @@
-package com.skipthedishes.challenge.business.old_entities;
+package com.skipthedishes.challenge.business.entities;
 
-import java.time.Instant;
 import java.util.UUID;
 
 public record Delivery(

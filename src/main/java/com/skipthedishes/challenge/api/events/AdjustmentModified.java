@@ -1,7 +1,6 @@
 package com.skipthedishes.challenge.api.events;
 
-import com.skipthedishes.challenge.business.old_entities.RawEvent;
-import com.skipthedishes.challenge.business.old_entities.Transaction;
+import com.skipthedishes.challenge.business.entities.Transaction;
 
 import java.time.Instant;
 import java.util.UUID;

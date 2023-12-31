@@ -1,9 +1,6 @@
 package com.skipthedishes.challenge.api.events;
 
-import com.skipthedishes.challenge.business.old_entities.RawEvent;
-import com.skipthedishes.challenge.business.old_entities.Transaction;
-
-import java.util.UUID;
+import com.skipthedishes.challenge.business.entities.Transaction;
 
 public interface CourierEvent {
 

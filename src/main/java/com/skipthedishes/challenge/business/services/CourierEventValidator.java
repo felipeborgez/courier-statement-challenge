@@ -4,7 +4,7 @@ import com.skipthedishes.challenge.api.events.AdjustmentModified;
 import com.skipthedishes.challenge.api.events.BonusModified;
 import com.skipthedishes.challenge.api.events.CourierEvent;
 import com.skipthedishes.challenge.api.events.DeliveryCreated;
-import com.skipthedishes.challenge.business.old_entities.Transaction;
+import com.skipthedishes.challenge.business.entities.Transaction;
 import com.skipthedishes.challenge.business.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

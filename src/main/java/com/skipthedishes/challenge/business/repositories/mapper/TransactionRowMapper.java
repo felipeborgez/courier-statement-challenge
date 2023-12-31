@@ -1,7 +1,7 @@
 package com.skipthedishes.challenge.business.repositories.mapper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.skipthedishes.challenge.business.old_entities.Transaction;
+import com.skipthedishes.challenge.business.entities.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 

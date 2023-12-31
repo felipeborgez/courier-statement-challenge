@@ -1,7 +1,7 @@
 package com.skipthedishes.challenge.business.repositories.impl;
 
-import com.skipthedishes.challenge.business.old_entities.RawEvent;
-import com.skipthedishes.challenge.business.old_entities.Transaction;
+import com.skipthedishes.challenge.business.entities.RawEvent;
+import com.skipthedishes.challenge.business.entities.Transaction;
 import com.skipthedishes.challenge.business.repositories.EventRepository;
 import com.skipthedishes.challenge.business.repositories.mapper.TransactionRowMapper;
 import org.postgresql.util.PGobject;

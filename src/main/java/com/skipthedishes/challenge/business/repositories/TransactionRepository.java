@@ -1,7 +1,6 @@
 package com.skipthedishes.challenge.business.repositories;
 
-import com.skipthedishes.challenge.business.entities.TransactionItem;
-import com.skipthedishes.challenge.business.old_entities.Transaction;
+import com.skipthedishes.challenge.business.entities.Transaction;
 
 import java.sql.Date;
 import java.util.List;

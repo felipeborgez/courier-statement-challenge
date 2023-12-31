@@ -59,8 +59,8 @@ export const options = {
 //
 export default function() {
 
- const randomUUID = uuidv4();
-  console.log(randomUUID); // 35acae14-f7cb-468a-9866-1fc45713149a
+// const randomUUID = uuidv4();
+//  console.log(randomUUID); // 35acae14-f7cb-468a-9866-1fc45713149a
 
     let couriers = [
         "178e054f-bab2-4bfe-ab28-0a07d716650f",
@@ -69,12 +69,8 @@ export default function() {
         "8bf27789-3d68-4528-87c3-01e21ee59b45",
         "7f217696-23fb-4261-b557-7fdd9010793e",
         "c681006d-1266-4a21-9cb3-39031adabe3f",
-        "305962a9-aa4c-4737-9434-cb7a326fd334",
-        "4d7d5cb6-81a0-47ed-9bec-50918f0e4736",
-        "2914df33-4c89-4718-9d35-12f4b5738015",
-        "599db3b8-8fd7-423b-a2a4-4f89c74dbb77"
+        "305962a9-aa4c-4737-9434-cb7a326fd334"
     ]
-
 
   let url = 'http://localhost:8080/v1/couriers/event';
   let data = {
