@@ -78,7 +78,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
         return jdbcTemplate.query("SELECT * FROM transaction t " +
                         "JOIN delivery d on t.delivery_id = d.id " +
                         "WHERE courier_id=? " +
-                        "AND occurred_at BETWEEN ? AND ?",
+                        "AND occurred_at BETWEEN ? AND (?::date + interval '23:59:59')",
                 new TransactionRowMapper(),
                 courierId, start_at, end_at
         );
