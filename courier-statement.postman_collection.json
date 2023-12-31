@@ -1,0 +1,306 @@
+{
+	"info": {
+		"_postman_id": "87a2c79b-f2d2-4711-bd3b-64154a4c1286",
+		"name": "Courier-Statement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31070151"
+	},
+	"item": [
+		{
+			"name": "Delivery Transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/couriers/:courier_id/transactions?startAt=2023-12-01&endAt=2023-12-30",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"couriers",
+						":courier_id",
+						"transactions"
+					],
+					"query": [
+						{
+							"key": "startAt",
+							"value": "2023-12-01"
+						},
+						{
+							"key": "endAt",
+							"value": "2023-12-30"
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "courier_id",
+							"value": "a1738301-69e2-42cb-9cd4-3054759802bf"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Weekly courier statement",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/couriers/:courier_id/statement",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"couriers",
+						":courier_id",
+						"statement"
+					],
+					"variable": [
+						{
+							"key": "courier_id",
+							"value": "a1738301-69e2-42cb-9cd4-3054759802bf"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New event",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"deliveryId\": \"{{$guid}}\",\n    \"courierId\": \"{{$guid}}\",\n    \"createdTimestamp\": \"{{$isoTimestamp}}\",\n    \"value\": \"{{$randomInt}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/couriers/event",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"couriers",
+						"event"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publish",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"deliveryId\": \"{{$guid}}\",\n    \"courierId\": \"{{$guid}}\",\n    \"createdTimestamp\": \"{{$isoTimestamp}}\",\n    \"value\": \"{{$randomInt}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/couriers/publish",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"couriers",
+						"publish"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delivery Event creation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"// pm.collectionVariables.unset(\"deliveries\")",
+							"var deliveries = pm.collectionVariables.get(\"deliveries\");",
+							"if(deliveries == undefined){",
+							"    newDelivery = [jsonData.deliveryId];",
+							"} else {",
+							"    newDelivery = JSON.parse(deliveries).concat(jsonData.deliveryId)",
+							"}",
+							"pm.collectionVariables.set(\"deliveries\", JSON.stringify(newDelivery));",
+							"",
+							"",
+							"",
+							"// pm.collectionVariables.unset(\"couriers\")",
+							"var couriers = pm.collectionVariables.get(\"couriers\");",
+							"if(couriers == undefined){",
+							"    newCourier = [jsonData.courierId];",
+							"} else {",
+							"    newCourier = JSON.parse(couriers).concat(jsonData.courierId)",
+							"}",
+							"pm.collectionVariables.set(\"couriers\", JSON.stringify(newCourier));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"deliveryId\": \"{{$guid}}\",\n    \"courierId\": \"{{$guid}}\",\n    \"createdTimestamp\": \"{{$isoTimestamp}}\",\n    \"value\": \"{{$randomInt}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/event/delivery",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"event",
+						"delivery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Event creation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var deliveries = JSON.parse(pm.collectionVariables.get(\"deliveries\"));",
+							"var randomDelivery = deliveries[Math.floor(Math.random() * deliveries.length)];",
+							"pm.collectionVariables.set(\"deliveryId\", randomDelivery);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"adjustmentId\": \"{{$guid}}\",\n    \"deliveryId\": \"{{deliveryId}}\",\n    \"modifiedTimestamp\": \"{{$isoTimestamp}}\",\n    \"value\": \"-200\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/event/adjustment",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"event",
+						"adjustment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bonus Event creation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var deliveries = JSON.parse(pm.collectionVariables.get(\"deliveries\"));",
+							"var randomDelivery = deliveries[Math.floor(Math.random() * deliveries.length)];",
+							"pm.collectionVariables.set(\"deliveryId\", randomDelivery);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bonusId\": \"{{$guid}}\",\n    \"deliveryId\": \"{{deliveryId}}\",\n    \"modifiedTimestamp\": \"{{$isoTimestamp}}\",\n    \"value\": \"200\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/event/bonus",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"event",
+						"bonus"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "couriers",
+			"value": ""
+		},
+		{
+			"key": "deliveries",
+			"value": ""
+		},
+		{
+			"key": "deliveryId",
+			"value": ""
+		}
+	]
+}
