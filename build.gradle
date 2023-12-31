@@ -2,10 +2,10 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.1.7'
 	id 'io.spring.dependency-management' version '1.1.4'
+	id 'com.google.cloud.tools.jib' version '1.8.0'
 }
 
 group = 'com.skipthedishes'
-version = '0.0.1-SNAPSHOT'
 
 java {
 	sourceCompatibility = '17'
@@ -19,16 +19,16 @@ dependencies {
 	implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
 	implementation "org.springframework.boot:spring-boot-starter-data-jdbc:$springBootVersion"
 	implementation "org.springframework.boot:spring-boot-starter-json:$springBootVersion"
-//	implementation 'org.springframework.data:spring-data-jpa:3.2.1'
 
-//	implementation 'org.flywaydb:flyway-core'
 	implementation 'org.springframework.kafka:spring-kafka'
 
-	implementation "org.springframework.cloud:spring-cloud-aws-core:$springCloudVersion"
-	implementation "org.springframework.cloud:spring-cloud-aws-context:$springCloudVersion"
+//	implementation "org.springframework.cloud:spring-cloud-aws-core:$springCloudVersion"
+//	implementation "org.springframework.cloud:spring-cloud-aws-context:$springCloudVersion"
 	implementation "org.springframework.cloud:spring-cloud-aws-messaging:$springCloudVersion"
-	implementation "org.springframework.cloud:spring-cloud-starter-aws-messaging:$springCloudVersion"
-//	implementation "org.springframework.cloud:spring-cloud-starter-aws:$springCloudVersion"
+//	implementation "org.springframework.cloud:spring-cloud-starter-aws-messaging:$springCloudVersion"
+	implementation "org.springframework.cloud:spring-cloud-starter-aws:$springCloudVersion"
+
+	implementation "org.springframework:spring-messaging:5.3.24"
 
 	implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
 	implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion"

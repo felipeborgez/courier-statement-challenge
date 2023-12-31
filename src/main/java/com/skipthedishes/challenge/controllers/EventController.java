@@ -9,6 +9,7 @@ import com.skipthedishes.challenge.api.events.DeliveryCreated;
 import com.skipthedishes.challenge.business.old_entities.RawEvent;
 import com.skipthedishes.challenge.business.repositories.EventRepository;
 import com.skipthedishes.challenge.business.services.EventService;
+import com.skipthedishes.challenge.messaging.publisher.QueueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,9 @@ public class EventController {
 
     @Autowired
     EventService service;
+
+    @Autowired
+    QueueService queueService;
 
     private static final Logger log = Logger.getLogger(EventController.class.getName());
 
@@ -84,5 +88,12 @@ public class EventController {
             return "Something unexpected happened";
         }
     }
+
+    @PostMapping("/task")
+    public void createTask(@RequestBody DeliveryCreated event){
+        log.info("Received task " + event.toString());
+        queueService.publishTask(event);
+    }
+
 
 }

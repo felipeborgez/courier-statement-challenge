@@ -6,7 +6,7 @@ import com.skipthedishes.challenge.business.old_entities.RawEvent;
 import com.skipthedishes.challenge.business.repositories.DeliveryRepository;
 import com.skipthedishes.challenge.business.repositories.EventRepository;
 import com.skipthedishes.challenge.business.repositories.TransactionRepository;
-import com.skipthedishes.challenge.messaging.publisher.KafkaMessagePublisher;
+//import com.skipthedishes.challenge.messaging.publisher.KafkaMessagePublisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.UUID;
 public class EventService {
 
     @Autowired
-    KafkaMessagePublisher kafkaPublisher;
+//    KafkaMessagePublisher kafkaPublisher;
 
     @Value("${messaging.queue.delivery_created}")
     private String deliveryCreatedEventTopic;
@@ -69,7 +69,7 @@ public class EventService {
 
 
     public void publish(DeliveryCreated event){
-        kafkaPublisher.sendEventsToTopic(deliveryCreatedEventTopic, event);
+//        kafkaPublisher.sendEventsToTopic(deliveryCreatedEventTopic, event);
 //            kafkaPublisher.sendMessageToTopic(deliveryCreatedEventTopic, objectMapper.writeValueAsString(event);
     }
 }

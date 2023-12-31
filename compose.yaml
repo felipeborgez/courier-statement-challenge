@@ -1,5 +1,12 @@
 services:
 
+  app:
+    build: .
+#    command:
+#      -
+    ports:
+      - '8081:8080'
+
   flyway:
     image: flyway/flyway:10-alpine
     command: -configFiles=/flyway/conf/flyway.config -locations=filesystem:/flyway/sql -connectRetries=60 migrate

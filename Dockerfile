@@ -1,4 +1,16 @@
-FROM eclipse-temurin:17-jdk-alpine
-VOLUME /tmp
-COPY target/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM azul/zulu-openjdk:18 as builder
+
+WORKDIR /build
+
+COPY . .
+
+RUN ./gradlew build -x test
+
+FROM azul/zulu-openjdk:18
+
+COPY --from=builder /build/libs/challenge.jar /app/challenge.jar
+
+EXPOSE 8080
+EXPOSE 8081
+
+CMD ["java", "-jar", "/app/challenge.jar"]
